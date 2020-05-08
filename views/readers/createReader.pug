@@ -1,0 +1,51 @@
+extends ../layouts/common
+block content
+	if errors
+		each error in errors
+			.alert.alert-danger= error
+	h2.text-center Create Readers
+	.container.mt-3
+		form(action="/readers/createReader", method="POST")
+			.form-group.col-md-6
+				label Password
+				input.form-control(name='password', type='password', maxlength='100', value=values ? values.password : "")
+
+			.form-group.col-md-6
+				label Name
+				input.form-control(name='name', type='text', maxlength='100', value=values ? values.name : "")
+
+			.form-group.col-md-6
+				label Date of birth
+				input.form-control(name='dateOfBirth', type='date', maxlength='100', value=values ? values.dateOfBirth : "")
+
+			.form-group.col-md-6
+				label Gender
+				input.form-control(name='gender', type='text', maxlength='100', value=values ? values.gender : "")
+
+			.form-group.col-md-6
+				label Phone 
+				input.form-control(name='phone', type='number', maxlength='100', value=values ? values.phone : "")
+
+			.form-group.col-md-6
+				label Id / Passport
+				input.form-control(name='IdCard', type='text', maxlength='100', value=values ? values.IdCart : "")
+
+			.form-group.col-md-6
+				label Address
+				input.form-control(name='address', type='text', maxlength='100', value=values ? values.address : "")
+
+			.form-group.col-md-6
+				label Email
+				input.form-control(name='email', type='text', maxlength='100', value=values ? values.datein : "")
+			
+			.form-group.col-md-6
+				label Date Create
+				input.form-control(name='dateCreate', type='date', maxlength='100', value=values ? values.dateCreate : "")
+
+			.form-group.col-md-6
+				label Expiry Date
+				input.form-control(name='expiryDate', type='date', maxlength='100', value=values ? values.expiryDate : "")
+
+				br
+
+				button.btn.btn-primary(type='submit') Add Reader

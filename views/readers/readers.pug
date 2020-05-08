@@ -1,0 +1,57 @@
+html
+   head
+    meta(charset='utf-8')
+    title Welcome to my website!
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='A cool thing made with Glitch')
+    link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+    link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='') Reader
+          li.nav-item
+            a.nav-link(href='') Book
+          li.nav-item.active
+            a.nav-link(href='') Home 
+          form.form-inline.mt-0(action='', method='GET')
+            input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+          li.nav-item.active.col-md-3
+            a.nav.btn.btn-outline-success.my-2.my-sm-0(href='/readers/createReader') Add new Reader 
+          ul.navbar-nav.ml-auto
+      main
+        h2 Oh hi,
+        table.table
+         thead.thead-dark
+          tr
+            th ID
+            th Name
+            th Date of birth
+            th Gender
+            th Date Create
+            th Expiry Date
+            th
+            th
+            th
+            th
+          each reader in readers
+            tr 
+              td= reader.readerId
+              td= reader.name
+              td= reader.dateOfBirth
+              td= reader.gender
+              td= reader.dateCreate
+              td= reader.expiryDate
+              td
+                a.btn.btn-outline-success(href='') View
+              td
+                a.btn.btn-outline-primary(href='/readers/editReader/'+reader.readerId) Edit
+              td
+                a.btn.btn-outline-danger(href='/readers/deleteReader/'+reader.readerId) Delete
+              td
+                a.btn.btn-outline-success(href='') Add Time

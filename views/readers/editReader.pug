@@ -1,0 +1,39 @@
+extends ../layouts/common
+block content
+ .container.mt-3
+  h3.text-center Edit Infomation Reader
+  form(method='POST')
+
+    .form-group
+    label(for='name') Name
+    input.form-control.col-md-6(type='text', name='name', value=readers ? readers[0].name : "")
+
+    label(for='password') Password
+    input.form-control.col-md-6(type='text', name='password', value=readers ? readers[0].password : "")
+
+    label(for='dateOfBirth') Date of Birth
+    input.form-control.col-md-6(type='date', name='dateOfBirth', value=readers ? readers[0].dateOfBirth : "")
+
+    label(for='IdCard') ID / Passport
+    input.form-control.col-md-6(type='text', name='IdCard', value=readers ? readers[0].IdCard : "")
+
+    label(for='phone') Phone
+    input.form-control.col-md-6(type='text', name='phone', value=readers ? readers[0].phone : "")
+
+    label(for='gender') Gender
+    input.form-control.col-md-6(type='text', name='gender', value=readers ? readers[0].gender : "")
+
+    label(for='address') Address
+    input.form-control.col-md-6(type='text', name='address', value=readers ? readers[0].address : "")
+
+    label(for='email') Email
+    input.form-control.col-md-6(type='text', name='email', value=readers ? readers[0].email : "")
+
+    label(for='dateCreate') Date Open Card
+    input.form-control.col-md-6(type='date', name='dateCreate', value=readers ? readers[0].dateCreate : "")
+
+    label(for='expiryDate') Date Close Card
+    input.form-control.col-md-6(type='date', name='expiryDate', value=readers ? readers[0].expiryDate : "")
+
+    br
+    button.btn.btn-primary Submit
