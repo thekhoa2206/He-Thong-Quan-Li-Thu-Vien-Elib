@@ -38,13 +38,11 @@ html
          thead.thead-dark
           tr
             th ID
-            th Name
-            th Date of birth
-            th Gender
-            th Date Create
-            th Expiry Date
+            th Tên
+            th Ngày Sinh
+            th Giới Tính
             th
-            th
+            th 
             th
             th
           each reader in readers
@@ -53,8 +51,6 @@ html
               td= reader.name
               td= reader.dateOfBirth
               td= reader.gender
-              td= reader.dateCreate
-              td= reader.expiryDate
               td
                 a.btn.btn-outline-success(href='/readers/viewReader/'+reader.readerId) View
               td

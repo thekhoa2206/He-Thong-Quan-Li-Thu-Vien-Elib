@@ -40,8 +40,8 @@ html
                  img.card-img-top(src="/" + book.picture, width='200', height='200')
                  .card-body
                   h5.card-title= book.name
-                  h6.card-title= "Quantity: "+book.quantity
+                  h6.card-title= "Số Lượng: "+book.quantity
                   h6.card-title= book.kind
-                  h6.card-title= "Address of book: " +book.address
+                  h6.card-title= "Địa Chỉ Của Sách: " +book.address
                   a.btn.btn-Success(href='/books/editBook/' +book.bookId) Edit
                   a.btn.btn-Danger(href='/books/deleteBook/' +book.bookId) Delete

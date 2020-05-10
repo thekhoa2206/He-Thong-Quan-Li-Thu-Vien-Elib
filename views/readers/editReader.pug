@@ -14,9 +14,6 @@ block content
     label(for='dateOfBirth') Date of Birth
     input.form-control.col-md-6(type='date', name='dateOfBirth', value=readers ? readers[0].dateOfBirth : "")
 
-    label(for='IdCard') ID / Passport
-    input.form-control.col-md-6(type='text', name='IdCard', value=readers ? readers[0].IdCard : "")
-
     label(for='phone') Phone
     input.form-control.col-md-6(type='text', name='phone', value=readers ? readers[0].phone : "")
 
@@ -28,12 +25,6 @@ block content
 
     label(for='email') Email
     input.form-control.col-md-6(type='text', name='email', value=readers ? readers[0].email : "")
-
-    label(for='dateCreate') Date Open Card
-    input.form-control.col-md-6(type='date', name='dateCreate', value=readers ? readers[0].dateCreate : "")
-
-    label(for='expiryDate') Date Close Card
-    input.form-control.col-md-6(type='date', name='expiryDate', value=readers ? readers[0].expiryDate : "")
 
     br
     button.btn.btn-primary Submit

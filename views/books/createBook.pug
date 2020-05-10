@@ -7,31 +7,31 @@ block content
 	.container.mt-3
 		form(action="/books/createBook", method="POST", enctype="multipart/form-data")
 			.form-group.col-md-6
-				label Name of book
+				label Tên Sách
 				input.form-control(name='name', type='text', maxlength='100', value=values ? values.name : "")
 
 			.form-group.col-md-6
-				label Quantity
+				label Số Lượng
 				input.form-control(name='quantity', type='text', maxlength='100', value=values ? values.quantity : "")
 
 			.form-group.col-md-6
-				label Author
+				label Tác Giả
 				input.form-control(name='author', type='text', maxlength='100', value=values ? values.author : "")
 
 			.form-group.col-md-6
-				label Publishing Year 
-				input.form-control(name='publishingYear', type='date', maxlength='100', value=values ? values.publishingYear : "")
+				label Năm xuất bản
+				input.form-control(name='publishingYear', type='text', maxlength='100', value=values ? values.publishingYear : "")
 
 			.form-group.col-md-6
-				label Kind of book
+				label Thể Loại
 				input.form-control(name='kind', type='text', maxlength='100', value=values ? values.kind : "")
 
 			.form-group.col-md-6
-				label Date add book
+				label Địa Chỉ Cuốn Sách
 				input.form-control(name='address', type='text', maxlength='100', value=values ? values.address : "")
 
 			.form-group.col-md-6
-				label Picture
+				label Ảnh
 				input.form-control-file(name='picture', type='file', maxlength='100', value=values ? values.picture : "")
 
 				br
