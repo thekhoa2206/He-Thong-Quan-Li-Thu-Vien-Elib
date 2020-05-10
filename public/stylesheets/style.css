@@ -1,0 +1,17 @@
+h2 {
+  color: #ca0b0b;
+  margin-left: 50px;
+}
+
+h5 {
+  color: blue;
+}
+p{
+  font-size: 15;
+}
+
+footer {
+  margin-top: 3em;
+  padding-top: 1.5em;
+  border-top: 1px solid lightgrey;
+}
