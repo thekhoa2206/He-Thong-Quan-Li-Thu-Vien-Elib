@@ -10,6 +10,15 @@ module.exports.index = function (req, res) {
     res.render('./readers/readers', { readers: result});
   });
 };
+
+module.exports.viewReaders = function(req, res){
+  var readerId = req.params.readerId;
+  con.query('SELECT * FROM readers WHERE readerId = ?', readerId, function (err, result) { 
+  if (err) throw err;
+  res.render('./readers/viewReader', { readers: result});
+});
+};
+
 module.exports.createReader= function (req, res) {
   res.render('./readers/createReader')
 };
