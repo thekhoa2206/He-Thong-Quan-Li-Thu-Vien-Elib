@@ -1,0 +1,48 @@
+html
+   head
+    meta(charset='utf-8')
+    title Welcome to my website!
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='A cool thing made with Glitch')
+    link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css", integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh", crossorigin="anonymous")
+   body
+      header
+       nav.navbar.navbar-expand-lg.navbar-light.bg-light
+        ul.navbar-nav.mr-auto
+          li.nav-item.active
+            a.nav-link(href='/library') Home 
+          li.nav-item.active
+            a.nav-link(href='/readers') Readers
+          li.nav-item.active
+            a.nav-link(href='') Books
+          form.form-inline.mt-0(action='', method='GET')
+            input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
+          li.nav-item.active
+            a.btn.btn-outline-success(href='/books/createBook') Add New Book
+        ul.navbar-nav.ml-auto
+          li
+            if reader
+             p.nav-link(href='#')= reader.name
+          li
+            if !reader
+             a.btn.btn-primary(href='/auth/login') Login
+          li 
+            a.btn.btn-outline-success(href='/logout') Log out
+      main
+       link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+       .row(style='margin-top: 20; margin-left: 30; margin-right: 30;')
+         each book in books
+          .col-sm-2(style='margin-bottom: 20;')
+             .card(style='width: 200; height: 370;')
+                 img.card-img-top(src="/" + book.picture, width='200', height='200')
+                 .card-body
+                  h5.card-title= book.name
+                  h6.card-title= "Quantity: "+book.quantity
+                  h6.card-title= book.kind
+                  h6 Address of book:
+                  h6.card-title= "Row: " +book.cot +" Column: " + book.hang
+                  a.btn.btn-Success(href='/books/editBook/' +book.bookId) Edit
+                  a.btn.btn-Danger(href='/books/deleteBook/' +book.bookId) Delete

@@ -1,0 +1,26 @@
+extends ../layouts/common
+block content
+ .container.mt-3
+  h3.text-center Edit Information Book
+  form(method='POST')
+
+    .form-group
+    label(for='name') Name of Book
+    input.form-control.col-md-6(type='text', name='name', value=books ? books[0].name : "")
+
+    label(for='quantity') Quantity
+    input.form-control.col-md-6(type='text', name='quantity', value=books ? books[0].quantity : "")
+
+    label(for='row') Row 
+    input.form-control.col-md-6(type='text', name='row', value=books ? books[0].cot : "")
+
+    label(for='column') Column 
+    input.form-control.col-md-6(type='text', name='column', value=books ? books[0].hang : "")
+
+    label(for='kind') Kind of book
+    input.form-control.col-md-6(type='text', name='kind', value=books ? books[0].kind : "")
+
+    label(for='dateAdd') Date Add
+    input.form-control.col-md-6(type='date', name='dateAdd', value=books ? books[0].dateAdd : "")
+    br
+    button.btn.btn-primary Submit
