@@ -11,16 +11,16 @@ block content
     label(for='quantity') Quantity
     input.form-control.col-md-6(type='text', name='quantity', value=books ? books[0].quantity : "")
 
-    label(for='row') Row 
-    input.form-control.col-md-6(type='text', name='row', value=books ? books[0].cot : "")
+    label(for='author') Author 
+    input.form-control.col-md-6(type='text', name='row', value=books ? books[0].author : "")
 
-    label(for='column') Column 
-    input.form-control.col-md-6(type='text', name='column', value=books ? books[0].hang : "")
+    label(for='publishingYear') Publishing Year 
+    input.form-control.col-md-6(type='date', name='column', value=books ? books[0].publishingYear : "")
 
     label(for='kind') Kind of book
     input.form-control.col-md-6(type='text', name='kind', value=books ? books[0].kind : "")
 
-    label(for='dateAdd') Date Add
-    input.form-control.col-md-6(type='date', name='dateAdd', value=books ? books[0].dateAdd : "")
+    label(for='address') Address
+    input.form-control.col-md-6(type='text', name='address', value=books ? books[0].address : "")
     br
     button.btn.btn-primary Submit
