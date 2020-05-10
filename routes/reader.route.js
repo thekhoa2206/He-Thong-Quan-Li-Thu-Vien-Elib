@@ -4,6 +4,8 @@ var controller = require('../controllers/reader.controller')
 
 router.get('/', controller.index);
 
+router.get('/viewReader/:readerId', controller.viewReaders);
+
 router.get('/createReader', controller.createReader);
 
 router.post('/createReader', controller.postCreateReader);
