@@ -5,8 +5,8 @@ block content
   form(method='POST')
 
     .form-group
-    label(for='name') Tên
-    input.form-control.col-md-6(type='text', name='name', value=readers ? readers[0].name : "")
+    label(for='nameUser') Tên
+    input.form-control.col-md-6(type='text', name='nameUser', value=readers ? readers[0].nameUser : "")
 
     label(for='password') Mật Khẩu
     input.form-control.col-md-6(type='text', name='password', value=readers ? readers[0].password : "")
