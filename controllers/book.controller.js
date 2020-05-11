@@ -16,7 +16,6 @@ module.exports.createBook = function (req, res) {
 };
 module.exports.postCreateBook = function (req, res) {
  req.body.bookId = shortid.generate(); //generate random id
- req.body.picture = req.file.path.split('\\').slice(1).join('/');
   var values = [
         req.body.bookId, 
         req.body.name, 
@@ -25,10 +24,10 @@ module.exports.postCreateBook = function (req, res) {
         req.body.publishingYear,
         req.body.kind,
         req.body.address,
-        req.body.picture
+        req.body.NXB
   ]; // create an array that include user inputs 
   console.log(req.body) //test
-    con.query('INSERT INTO books (bookId, name, quantity, author, publishingYear, kind, address, picture) VALUES (?)',[values], function(err, result){
+    con.query('INSERT INTO books (bookId, name, quantity, author, publishingYear, kind, address, NXB) VALUES (?)',[values], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
         });
@@ -46,7 +45,7 @@ module.exports.editBook = function(req, res){
 };
 
 module.exports.postEditBook =  function(req, res){
-  con.query('UPDATE books SET name = ? ,quantity = ?, author=?, publishingYear=?, kind=?, address=? WHERE bookId =? ',[req.body.name, req.body.quantity, req.body.author, req.body.publishingYear, req.body.kind, req.body.address, req.params.bookId],  function(err, result){
+  con.query('UPDATE books SET name = ? ,quantity = ?, author=?, publishingYear=?, kind=?, address=?, NXB=? WHERE bookId =? ',[req.body.name, req.body.quantity, req.body.author, req.body.publishingYear, req.body.kind, req.body.address,req.body.NXB, req.params.bookId],  function(err, result){
     if (err) throw err;
      res.redirect('/books');
   });
