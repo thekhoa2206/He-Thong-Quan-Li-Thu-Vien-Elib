@@ -2,9 +2,11 @@ const express = require('express')
 const port = 3000
 var readerRoute = require('./routes/reader.route');
 var bookRoute = require('./routes/book.route');
+var borrowingRoute = require('./routes/borrowReader.route');
+var borrowBookRoute = require('./routes/borrow.route');
 const cookieParser = require('cookie-parser');
 var authRoute = require('./routes/auth.route');
-
+var session = require('express-session')
 const app = express()
 
 
@@ -19,15 +21,17 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 app.use(express.static('public'))
 
-app.use('/readers',authMiddleware.adminAuth, readerRoute);
-app.use('/books', authMiddleware.adminAuth, bookRoute)
+app.use('/readers',authMiddleware.librarianAuth, readerRoute);
+app.use('/books', authMiddleware.librarianAuth, bookRoute);
+app.use('/borrowing', authMiddleware.readerAuth, borrowingRoute);
+app.use('/viewBorrowReader', authMiddleware.librarianAuth, borrowBookRoute);
 app.use('/auth', authRoute)
 
 // index page 
 app.get('/', function(req, res) {
     res.render('index');
 });
-app.get('/library',authMiddleware.adminAuth, function(req, res) {
+app.get('/library',authMiddleware.librarianAuth, function(req, res) {
     res.render('library');
 });
 app.get('/logout', function(req, res){
