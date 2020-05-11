@@ -25,18 +25,20 @@ module.exports.createReader= function (req, res) {
 
 module.exports.postCreateReader= function (req, res) {
   req.body.readerId = shortid.generate(); //generate random id
+  var userId = 3
   var values = [
         md5(req.body.password),
-        req.body.name, 
+        req.body.nameUser, 
         req.body.dateOfBirth,
         req.body.gender,
         req.body.phone,
         req.body.email,
         req.body.address,
-        req.body.readerId
+        req.body.readerId,
+        userId
   ]; // create an array that include user inputs 
   console.log(req.body) //test
-    con.query('INSERT INTO readers ( password, name, dateOfBirth, gender, phone, email, address, readerId) VALUES (?)',[values], function(err, result){
+    con.query('INSERT INTO readers ( password, nameUser, dateOfBirth, gender, phone, email, address, readerId, userId) VALUES (?)',[values], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
         });
@@ -54,7 +56,7 @@ module.exports.editReaders = function(req, res){
 
 module.exports.postEditReaders =  function(req, res){
   var readerId = req.params.readerId
-  con.query('UPDATE readers SET name = ? ,password = ?, dateOfBirth=?, gender=?, phone=?, address=?, email=?  WHERE readerId =? ',[req.body.name, md5(req.body.password), req.body.dateOfBirth, req.body.gender, req.body.phone, req.body.address, req.body.email, req.params.readerId],  function(err, result){
+  con.query('UPDATE readers SET nameUser = ? ,password = ?, dateOfBirth=?, gender=?, phone=?, address=?, email=?  WHERE readerId =? ',[req.body.nameUser, md5(req.body.password), req.body.dateOfBirth, req.body.gender, req.body.phone, req.body.address, req.body.email, req.params.readerId],  function(err, result){
     if (err) throw err;
      res.redirect('/readers');
   });
