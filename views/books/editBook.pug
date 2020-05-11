@@ -5,22 +5,25 @@ block content
   form(method='POST')
 
     .form-group
-    label(for='name') Name of Book
+    label(for='name') Tên Sách
     input.form-control.col-md-6(type='text', name='name', value=books ? books[0].name : "")
 
-    label(for='quantity') Quantity
+    label(for='quantity') Số Lượng
     input.form-control.col-md-6(type='text', name='quantity', value=books ? books[0].quantity : "")
 
-    label(for='author') Author 
-    input.form-control.col-md-6(type='text', name='row', value=books ? books[0].author : "")
+    label(for='author') Tác Giả 
+    input.form-control.col-md-6(type='text', name='author', value=books ? books[0].author : "")
 
-    label(for='publishingYear') Publishing Year 
-    input.form-control.col-md-6(type='date', name='column', value=books ? books[0].publishingYear : "")
+    label(for='publishingYear') Năm Sản Xuất
+    input.form-control.col-md-6(type='text', name='publishingYear', value=books ? books[0].publishingYear : "")
 
-    label(for='kind') Kind of book
+    label(for='kind') Thể Loại
     input.form-control.col-md-6(type='text', name='kind', value=books ? books[0].kind : "")
 
-    label(for='address') Address
+    label(for='address') Địa Chỉ
     input.form-control.col-md-6(type='text', name='address', value=books ? books[0].address : "")
+
+    label(for='NXB') Nhà Xuất Bản
+    input.form-control.col-md-6(type='text', name='NXB', value=books ? books[0].NXB : "")
     br
     button.btn.btn-primary Submit

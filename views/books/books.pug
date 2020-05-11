@@ -25,23 +25,38 @@ html
         ul.navbar-nav.ml-auto
           li
             if reader
-             p.nav-link(href='#')= reader.name
+             p.nav-link(href='#')= reader.nameUser
           li
             if !reader
              a.btn.btn-primary(href='/auth/login') Login
           li 
             a.btn.btn-outline-success(href='/logout') Log out
       main
-       link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
-       .row(style='margin-top: 20; margin-left: 30; margin-right: 30;')
-         each book in books
-          .col-sm-2(style='margin-bottom: 20;')
-             .card(style='width: 200; height: 370;')
-                 img.card-img-top(src="/" + book.picture, width='200', height='200')
-                 .card-body
-                  h5.card-title= book.name
-                  h6.card-title= "Số Lượng: "+book.quantity
-                  h6.card-title= book.kind
-                  h6.card-title= "Địa Chỉ Của Sách: " +book.address
+        h2 Oh hi,
+        table.table
+         thead.thead-dark
+          tr
+            th Mã Sách
+            th Tên Sách
+            th Tác Giả
+            th Năm Sản Xuất
+            th Số Lượng
+            th Thể Loại
+            th Nhà Xuất Bản
+            th Địa Chỉ Sách
+            th
+            th
+          each book in books
+            tr 
+              td= book.bookId
+              td= book.name
+              td= book.author
+              td= book.publishingYear
+              td= book.quantity
+              td= book.kind
+              td= book.NXB
+              td= book.address
+              td
                   a.btn.btn-Success(href='/books/editBook/' +book.bookId) Edit
+              td
                   a.btn.btn-Danger(href='/books/deleteBook/' +book.bookId) Delete

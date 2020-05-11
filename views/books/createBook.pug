@@ -5,7 +5,7 @@ block content
 			.alert.alert-danger= error
 	h2.text-center Create New Book
 	.container.mt-3
-		form(action="/books/createBook", method="POST", enctype="multipart/form-data")
+		form(action="/books/createBook", method="POST")
 			.form-group.col-md-6
 				label Tên Sách
 				input.form-control(name='name', type='text', maxlength='100', value=values ? values.name : "")
@@ -27,12 +27,12 @@ block content
 				input.form-control(name='kind', type='text', maxlength='100', value=values ? values.kind : "")
 
 			.form-group.col-md-6
-				label Địa Chỉ Cuốn Sách
+				label Địa Chỉ Cuốn Sách(Trong thư viện)
 				input.form-control(name='address', type='text', maxlength='100', value=values ? values.address : "")
 
 			.form-group.col-md-6
-				label Ảnh
-				input.form-control-file(name='picture', type='file', maxlength='100', value=values ? values.picture : "")
+				label Nhà Xuất Bản
+				input.form-control(name='NXB', type='text', maxlength='100', value=values ? values.NXB : "")
 
 				br
 
