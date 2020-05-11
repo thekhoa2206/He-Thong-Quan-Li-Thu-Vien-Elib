@@ -36,11 +36,14 @@ module.exports.postLogin = function (req, res, next) {
 		res.cookie('readerId', result[0].readerId, {
 			signed: true
 		})
-		if (result[0].readerId.localeCompare('11111111') === 0){
+		if (result[0].userId == 1){
 			res.redirect('/library');
 		}
-		if (result[0].readerId.localeCompare('11111111') !== 0){
+		if (result[0].userId == 2){
 			res.redirect('/library');
+		}
+		if (result[0].userId == 3){
+			res.redirect('/borrowing');
 		}
 		
 
