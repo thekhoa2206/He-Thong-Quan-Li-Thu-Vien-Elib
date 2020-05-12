@@ -30,6 +30,9 @@ html
           li 
             a.btn.btn-outline-success(href='/logout') Log out
       main
+        if errors
+          each error in errors
+            .alert.alert-danger= error
         h2 Mượn Sách
         .container.mt-3
           form(action="/borrowing/borrowBook", method="POST")
