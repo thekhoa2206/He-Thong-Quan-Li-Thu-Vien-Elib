@@ -30,6 +30,7 @@ module.exports.borrowBook = function (req, res) {
 };
 
 module.exports.postBorrowBook = function (req, res) {
+   var errors = [];
   var bookId = req.params.bookId;
   var readerId = req.signedCookies.readerId;
   req.body.borrowId = shortid.generate(); //generate random id
@@ -50,6 +51,11 @@ module.exports.postBorrowBook = function (req, res) {
   
   //console.log(ngayMuon);
   //console.log(ngayTra);
+con.query('SELECT COUNT (readerId) AS NumberOfBook FROM borrowing WHERE readerId = ?' , readerId , function(err, result){
+ var numberOfBook = result[0].NumberOfBook;
+  //console.log(numberOfBook);
+
+  if(numberOfBook < 3){
    var values = [
         req.body.bookId, 
         readerId, 
@@ -61,8 +67,19 @@ module.exports.postBorrowBook = function (req, res) {
     con.query('INSERT INTO borrowing (bookId, readerId, ngayMuon, ngayTra, borrowId) VALUES (?)',[values], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
+           res.redirect('/borrowing')// update added dream
         });
-  res.redirect('/borrowing')// update added dream
+    };
+    if(numberOfBook >= 3) {
+   errors.push("Bạn Đã Mượn Quá 3 Quyển Sách Nên Không Thể Mượn Được Tiếp!!!!");
+  };
+    if(errors.length){
+      res.render('./borrowing/borrowBook',{
+        errors: errors
+      });
+      return;
+    }
+});
 };
 
 module.exports.viewReader = function(req, res) {
