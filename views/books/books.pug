@@ -17,6 +17,8 @@ html
             a.nav-link(href='/readers') Readers
           li.nav-item.active
             a.nav-link(href='') Books
+          li.nav-item.active
+            a.nav-link(href='/books/returnBook') Trả Sách
           form.form-inline.mt-0(action='', method='GET')
             input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
@@ -32,7 +34,7 @@ html
           li 
             a.btn.btn-outline-success(href='/logout') Log out
       main
-        h2 Oh hi,
+        h2 Thông Tin Sách
         table.table
          thead.thead-dark
           tr

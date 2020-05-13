@@ -12,15 +12,18 @@ html
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
           li.nav-item.active
-            a.nav-link(href='') Home 
+            a.nav-link(href='/borrowing') Home 
           li.nav-item.active
             a.nav-link(href='/borrowing/borrowBook') Mượn Sách
           li.nav-item.active
-            a.nav-link(href='') Thông tin độc giả
+            a.nav-link(href='borrowing/viewReader') Thông tin độc giả
           form.form-inline.mt-0(action='/borrowing/searchBook', method='GET')
             input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
         ul.navbar-nav.ml-auto
+          li
+            if reader
+             p.nav-link(href='#')= "Ngày Tạo Thẻ: " + reader.ngayTao +"____  Ngày Hết Hạn Thẻ: " +reader.ngayHetHan
           li
             if reader
              p.nav-link(href='#')= reader.nameUser
@@ -29,8 +32,8 @@ html
              a.btn.btn-primary(href='/auth/login') Login
           li 
             a.btn.btn-outline-success(href='/logout') Logout
-      main
-        h2 Oh hi,
+      main.text-center
+        h2 Thông Tin Mượn Sách
         table.table
          thead.thead-dark
           tr

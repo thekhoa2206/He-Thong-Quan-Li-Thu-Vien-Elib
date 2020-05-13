@@ -34,32 +34,27 @@ html
             a.btn.btn-outline-success(href='/logout') Log out
       main
         h2 Oh hi,
-        table.table
+        table.table.col-md-6
          thead.thead-dark
           tr
             th Mã Độc Giả
             th Tên
-            th Ngày Sinh
-            th Giới Tính
             th Ngày Tạo Thẻ
             th Ngày Hết Hạn
-            th
-            th 
-            th
-            th
           each reader in readers
             tr 
               td= reader.readerId
               td= reader.nameUser
-              td= reader.dateOfBirth
-              td= reader.gender
               td= reader.ngayTao
               td= reader.ngayHetHan
-              td
-                a.btn.btn-outline-success(href='/readers/viewReader/'+reader.readerId) View
-              td
-                a.btn.btn-outline-primary(href='/readers/editReader/'+reader.readerId) Edit
-              td
-                a.btn.btn-outline-danger(href='/readers/deleteReader/'+reader.readerId) Delete
-              td
-                a.btn.btn-outline-success(href='/readers/addTime/'+reader.readerId) Add Time
+        br
+        br
+        h2 Thêm thời gian thẻ
+        .container.mt-3
+          form(method="POST")
+            .form-group.col-md-6
+              label Thêm thời gian theo quý(1 quý = 3 tháng, mua 3 quý được 4 quý)
+              input.form-control(name='numbers', type='numbers', maxlength='100', value=values ? values.numbers : "")
+              br
+
+              button.btn.btn-primary(type='submit') Thêm Thời Gian
