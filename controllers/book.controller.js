@@ -58,3 +58,23 @@ module.exports.deleteBook = function(req, res){
   res.redirect('/books');
  });
 };
+module.exports.returnBook = function(req, res){
+   res.render('./books/returnBook')
+};
+module.exports.postReturnBook = function(req, res){
+   var bookId = req.body.bookId;
+  con.query('DELETE FROM borrowing WHERE bookId = ?',bookId, function (err, result){
+    if (err) throw err;
+      con.query('SELECT (quantity) AS QuantityBook FROM books WHERE bookId = ?',bookId, function (err, result){
+    if (err) throw err; 
+     var quantity = result[0].QuantityBook;
+     quantity = quantity + 1;
+    console.log(quantity);
+        con.query('UPDATE books SET quantity = ? WHERE bookId=?',[quantity, bookId], function(err, result){
+        if(err) throw err;
+            console.log("1 record inserted"); //checked
+        });
+  });
+  res.redirect('/books/returnBook');
+ });
+};
