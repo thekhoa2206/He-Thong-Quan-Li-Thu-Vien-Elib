@@ -15,4 +15,8 @@ router.post('/editBook/:bookId', controller.postEditBook);
 
 router.get('/deleteBook/:bookId', controller.deleteBook);
 
+router.get('/returnBook', controller.returnBook);
+
+router.post('/returnBook', controller.postReturnBook);
+
 module.exports = router;

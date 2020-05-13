@@ -16,4 +16,8 @@ router.post('/editReader/:readerId' , controller.postEditReaders);
 
 router.get('/deleteReader/:readerId', controller.deleteReaders);
 
+router.get('/addTime/:readerId', controller.addTimes);
+
+router.post('/addTime/:readerId', controller.postAddTimes);
+
 module.exports = router;
