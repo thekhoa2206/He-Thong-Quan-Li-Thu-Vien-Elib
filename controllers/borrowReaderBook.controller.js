@@ -25,14 +25,14 @@ module.exports.searchBooks = function(req, res){
 
 module.exports.borrowBook = function (req, res) {
    var bookId = req.params.bookId
-   var readerId = req.signedCookies.readerId;
+   var readerId = req.session.readerId;
     res.render('./borrowing/borrowBook');
 };
 
 module.exports.postBorrowBook = function (req, res) {
    var errors = [];
-  var bookId = req.params.bookId;
-  var readerId = req.signedCookies.readerId;
+  var bookId = req.body.bookId;
+  var readerId = req.session.readerId;
   req.body.borrowId = shortid.generate(); //generate random id
 
   var date = new Date();
@@ -49,12 +49,11 @@ module.exports.postBorrowBook = function (req, res) {
   var day = (g.getDate() + 100).toString().substring(1);
   ngayTra = day + '/' + month + '/' + year;
   
-  //console.log(ngayMuon);
-  //console.log(ngayTra);
-con.query('SELECT COUNT (readerId) AS NumberOfBook FROM borrowing WHERE readerId = ?' , readerId , function(err, result){
+  //console.log(bookId);
+
+ con.query('SELECT COUNT (readerId) AS NumberOfBook FROM borrowing WHERE readerId = ?' , readerId , function(err, result){
  var numberOfBook = result[0].NumberOfBook;
   //console.log(numberOfBook);
-
   if(numberOfBook < 3){
    var values = [
         req.body.bookId, 
@@ -63,11 +62,23 @@ con.query('SELECT COUNT (readerId) AS NumberOfBook FROM borrowing WHERE readerId
         ngayTra,
         req.body.borrowId
   ]; // create an array that include user inputs 
+
+  
   console.log(req.body) //test
     con.query('INSERT INTO borrowing (bookId, readerId, ngayMuon, ngayTra, borrowId) VALUES (?)',[values], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
-           res.redirect('/borrowing')// update added dream
+    con.query('SELECT (quantity) AS QuantityBook FROM books WHERE bookId = ?',bookId, function (err, result){
+    if (err) throw err; 
+     var quantity = result[0].QuantityBook;
+     quantity = quantity-1;
+    console.log(quantity);
+        con.query('UPDATE books SET quantity = ? WHERE bookId=?',[quantity, bookId], function(err, result){
+        if(err) throw err;
+            console.log("1 record inserted"); //checked
+        });
+  });
+           res.redirect('/borrowing/viewReader')// update added dream
         });
     };
     if(numberOfBook >= 3) {
@@ -83,9 +94,10 @@ con.query('SELECT COUNT (readerId) AS NumberOfBook FROM borrowing WHERE readerId
 };
 
 module.exports.viewReader = function(req, res) {
-   var readerId = req.signedCookies.readerId;
-    con.query('SELECT borrowing.readerId, books.author, books.kind, borrowing.bookId, books.bookId, readers.readerId, borrowing.ngayMuon, borrowing.ngayTra, books.name, readers.nameUser FROM borrowing, books, readers WHERE borrowing.bookId = books.bookId AND borrowing.readerId=readers.readerId AND readers.readerId=?',readerId, function (err, result) { // retrieve data 
+   var readerId = req.session.readerId;
+    con.query('SELECT borrowing.readerId, books.author, books.kind, borrowing.bookId, books.bookId, readers.readerId, borrowing.ngayMuon, borrowing.ngayTra, books.name, readers.nameUser, readers.ngayTao, readers.ngayHetHan FROM borrowing, books, readers WHERE borrowing.bookId = books.bookId AND borrowing.readerId=readers.readerId AND readers.readerId=?',readerId, function (err, result) { // retrieve data 
     if (err) throw err;
+    console.log(result[0])
     res.render('./borrowing/viewReader',{borrows : result});
   });
 };
