@@ -25,7 +25,23 @@ module.exports.createReader= function (req, res) {
 
 module.exports.postCreateReader= function (req, res) {
   req.body.readerId = shortid.generate(); //generate random id
-  var userId = 3
+  var userId = 2;
+  
+  var date = new Date();
+  var year = date.getFullYear().toString();
+  var month = (date.getMonth() + 101).toString().substring(1);
+  var day = (date.getDate() + 100).toString().substring(1);
+  ngayTao = day + '/' + month + '/' + year;
+ 
+ var e = date.getTime()+ 86400*1000*30*3*req.body.numbers;
+
+   var g = new Date(e)
+  var year = g.getFullYear().toString();
+  var month = (g.getMonth() + 101).toString().substring(1);
+  var day = (g.getDate() + 100).toString().substring(1);
+  ngayHetHan = day + '/' + month + '/' + year;
+
+
   var values = [
         md5(req.body.password),
         req.body.nameUser, 
@@ -35,10 +51,12 @@ module.exports.postCreateReader= function (req, res) {
         req.body.email,
         req.body.address,
         req.body.readerId,
-        userId
+        userId,
+        ngayTao,
+        ngayHetHan
   ]; // create an array that include user inputs 
   console.log(req.body) //test
-    con.query('INSERT INTO readers ( password, nameUser, dateOfBirth, gender, phone, email, address, readerId, userId) VALUES (?)',[values], function(err, result){
+    con.query('INSERT INTO readers ( password, nameUser, dateOfBirth, gender, phone, email, address, readerId, userId, ngayTao, ngayHetHan) VALUES (?)',[values], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
         });
@@ -68,4 +86,48 @@ module.exports.deleteReaders = function(req, res){
     if (err) throw err;
   res.redirect('/readers');
  });
+};
+
+module.exports.addTimes = function(req, res){
+   var readerId = req.params.readerId; 
+     con.query('SELECT * FROM readers WHERE readerId = ?',readerId, function (err, result){
+    if (err) throw err;
+    res.render('./readers/addTime', {readers : result});
+});
+};
+
+module.exports.postAddTimes = function(req, res){
+     var readerId = req.params.readerId;
+    con.query('SELECT * FROM readers WHERE readerId = ?',readerId, function (err, result){
+     //var ngayTao = result[0].ngayTao;
+     var ngayHetHan = result[0].ngayHetHan;
+     //console.log(ngayHetHan);
+      x =  ngayHetHan.slice(0, 2);
+      y =  ngayHetHan.slice(3, 5);
+      z =  ngayHetHan.slice(6,10);
+
+       var g = new Date();
+      g.setDate(x);
+      g.setMonth(y);
+      g.setFullYear(z);
+       var date = new Date(g);
+      var e = date.getTime()
+      //console.log(e);  //test
+     if(req.body.numbers == 3){
+      var f = e + 86400*1000*30*3*4;
+    } else{
+      var f = e + 86400*1000*30*3*req.body.numbers;
+    }
+      var g = new Date(f)
+      var year = g.getFullYear().toString();
+      var month = (g.getMonth() + 101).toString().substring(1);
+      var day = (g.getDate() + 100).toString().substring(1);
+      ngayHetHan = day + '/' + month + '/' + year;
+
+  con.query('UPDATE readers SET ngayHetHan = ? WHERE readerId=?',[ngayHetHan, req.params.readerId], function(err, result){
+        if(err) throw err;
+            console.log("1 record inserted"); //checked
+ res.redirect('/readers');
+ });
+});
 };
