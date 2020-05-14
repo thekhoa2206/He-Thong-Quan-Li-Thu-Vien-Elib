@@ -5,10 +5,24 @@ var md5 = require('md5')
 
 
 module.exports.index = function (req, res) {
-    con.query('SELECT * FROM readers', function (err, result) { // retrieve data 
+  userId = 3;
+    con.query('SELECT * FROM readers WHERE userId=?',userId, function (err, result) { // retrieve data 
     if (err) throw err;
     res.render('./readers/readers', { readers: result});
   });
+};
+
+module.exports.searchReader = function(req, res){
+  var readerId = 3;
+  var q = req.query.q;
+  con.query('SELECT * FROM readers WHERE userId =?',readerId, function (err, result) { // retrieve data 
+    if (err) throw err;
+    console.log(result);
+    var matchedReaders = result.filter(function(reader){
+      return reader.nameUser.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('./readers/readers', { readers: matchedReaders});
+  }); 
 };
 
 module.exports.viewReaders = function(req, res){
@@ -25,7 +39,7 @@ module.exports.createReader= function (req, res) {
 
 module.exports.postCreateReader= function (req, res) {
   req.body.readerId = shortid.generate(); //generate random id
-  var userId = 2;
+  var userId = 3;
   
   var date = new Date();
   var year = date.getFullYear().toString();

@@ -1,4 +1,4 @@
-var mysql = require('mysql')
+var mysql = require('mysql');
 var con = require('../mysql-connection')
 var md5 = require('md5')
 
@@ -33,19 +33,19 @@ module.exports.postLogin = function (req, res, next) {
 			});
 			return;
 		}
-		res.cookie('readerId', result[0].readerId, {
-			signed: true
-		})
-		if (result[0].userId == 1){
-			res.redirect('/library');
-		}
-		if (result[0].userId == 2){
-			res.redirect('/library');
-		}
-		if (result[0].userId == 3){
-			res.redirect('/borrowing');
-		}
-		
+		req.session.readerId = result[0].readerId;
 
+		//req.session.username = result[0].username;
+		console.log(result[0].userId)
+
+		if (result[0].userId.localeCompare("3") == 0){
+		res.redirect('/borrowing');
+		}
+		else if(result[0].userId.localeCompare("2")  == 0){
+     	res.redirect('/library');
+		}
+		else if(result[0].userId.localeCompare("1")  == 0){
+     	res.redirect('/librarians');
+		}
 });
 };

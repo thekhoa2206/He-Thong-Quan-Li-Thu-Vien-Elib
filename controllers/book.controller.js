@@ -11,6 +11,19 @@ module.exports.books = function (req, res) {
   });
 };
 
+module.exports.searchBook = function(req, res){
+  var q = req.query.q;
+  con.query('SELECT * FROM books ', function (err, result) { // retrieve data 
+    if (err) throw err;
+    console.log(result);
+    var matchedBooks = result.filter(function(book){
+      return book.name.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+    });
+    res.render('./books/books', { books: matchedBooks});
+  }); 
+};
+
+
 module.exports.createBook = function (req, res) {
   res.render('./books/createBook');
 };
