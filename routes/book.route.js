@@ -5,6 +5,8 @@ var controller = require('../controllers/book.controller');
 
 router.get('/', controller.books);
 
+router.get('/searchBook', controller.searchBook);
+
 router.get('/createBook', controller.createBook);
 
 router.post('/createBook', controller.postCreateBook);
