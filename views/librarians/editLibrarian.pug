@@ -1,0 +1,30 @@
+extends ../layouts/common
+block content
+ .container.mt-3
+  h3.text-center Edit Infomation Librarian
+  form(method='POST')
+
+    .form-group
+    label(for='nameUser') Tên
+    input.form-control.col-md-6(type='text', name='nameUser', value=readers ? readers[0].nameUser : "")
+
+    label(for='password') Mật Khẩu
+    input.form-control.col-md-6(type='text', name='password', value=readers ? readers[0].password : "")
+
+    label(for='dateOfBirth') Ngày Sinh
+    input.form-control.col-md-6(type='date', name='dateOfBirth', value=readers ? readers[0].dateOfBirth : "")
+
+    label(for='phone') Số Điện Thoại
+    input.form-control.col-md-6(type='text', name='phone', value=readers ? readers[0].phone : "")
+
+    label(for='gender') Giới Tính
+    input.form-control.col-md-6(type='text', name='gender', value=readers ? readers[0].gender : "")
+
+    label(for='address') Địa Chỉ
+    input.form-control.col-md-6(type='text', name='address', value=readers ? readers[0].address : "")
+
+    label(for='email') Email
+    input.form-control.col-md-6(type='text', name='email', value=readers ? readers[0].email : "")
+
+    br
+    button.btn.btn-primary Submit
