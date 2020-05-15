@@ -8,6 +8,7 @@ module.exports.borrowBooks = function (req, res) {
     if (err) throw err;
     res.render('./borrowing/viewBorrowReader',{borrows : result});
   });
-};
+}; 
+
 
 

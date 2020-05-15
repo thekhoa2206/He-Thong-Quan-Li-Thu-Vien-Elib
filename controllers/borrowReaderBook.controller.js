@@ -3,8 +3,9 @@ var con = require('../mysql-connection')
 const shortid = require('shortid')
 
 module.exports.books = function (req, res) {
-   var bookId = req.body.bookId
-    con.query('SELECT * FROM books', function (err, result) { // retrieve data 
+   var bookId = req.body.bookId;
+   var quantity = 1;
+    con.query('SELECT * FROM books WHERE quantity = ?', quantity, function (err, result) { // retrieve data 
     if (err) throw err;
     res.render('./borrowing/readerBook', { books: result});
   });
