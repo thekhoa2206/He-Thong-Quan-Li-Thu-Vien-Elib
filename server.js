@@ -33,6 +33,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 app.use(session({
   secret: 'secret',
   resave: false,
+  cookie: { maxAge: 6000000 },
   saveUninitialized: true
 }))
 app.use(express.static('public'))
