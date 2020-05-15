@@ -21,4 +21,6 @@ router.get('/returnBook', controller.returnBook);
 
 router.post('/returnBook', controller.postReturnBook);
 
+router.get('/viewReturnBook', controller.returnBooks)
+
 module.exports = router;
