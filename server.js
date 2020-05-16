@@ -7,7 +7,7 @@ var borrowBookRoute = require('./routes/borrow.route');
 var librarianRoute = require('./routes/librarian.route')
 //const cookieParser = require('cookie-parser');
 var authRoute = require('./routes/auth.route');
-
+var authGRoute = require('./routes/authG.route');
 
 var session = require('express-session')
 const app = express()
@@ -48,7 +48,8 @@ app.use('/books', authMiddleware.readerAuth, authenticateMiddleware.librarianAut
 app.use('/borrowing',authMiddleware.readerAuth,authenticateMiddleware.readerAuth, borrowingRoute);
 app.use('/viewBorrowReader',authMiddleware.readerAuth ,authenticateMiddleware.librarianAuth,  borrowBookRoute);
 app.use('/librarians',authMiddleware.readerAuth ,authenticateMiddleware.adminAuth, librarianRoute)
-app.use('/auth', authRoute)
+app.use('/auth', authRoute);
+app.use('/authG', authGRoute);
 // index page 
 app.get('/', function(req, res) {
     res.render('index');
