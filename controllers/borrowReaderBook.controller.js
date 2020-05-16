@@ -1,6 +1,7 @@
 var mysql = require('mysql')
 var con = require('../mysql-connection')
 const shortid = require('shortid')
+var md5 = require('md5');
 
 module.exports.books = function (req, res) {
    var bookId = req.body.bookId;
@@ -12,9 +13,9 @@ module.exports.books = function (req, res) {
 };
 
 module.exports.searchBooks = function(req, res){
-  var bookId = req.params.bookId;
+  var bookId = req.session.bookId;
   var q = req.query.q;
-  con.query('SELECT * FROM books WHERE bookId=?', bookId, function (err, result) { // retrieve data 
+  con.query('SELECT * FROM books ', bookId, function (err, result) { // retrieve data 
     if (err) throw err;
     //console.log(result);
     var matchedBooks = result.filter(function(book){
@@ -101,4 +102,48 @@ module.exports.viewReader = function(req, res) {
     console.log(result[0])
     res.render('./borrowing/viewReader',{borrows : result});
   });
+};
+
+module.exports.changePassword = function(req, res){
+  res.render('./readers/changePassword');
+};
+
+module.exports.postChangePassword = function(req, res){
+   var errors = [];
+   var readerId= req.session.readerId
+   var oldPassword = md5(req.body.oldPassword);
+  var newPassword = md5(req.body.newPassword);
+  var confirmPassword = md5(req.body.confirmPassword);
+  con.query('SELECT * FROM readers WHERE readerId = ?',readerId, function (err, result){ 
+  var password = result[0].password;
+
+  if(oldPassword.localeCompare(password) ==0 && newPassword.localeCompare(confirmPassword)==0){
+  con.query('UPDATE readers SET password = ? WHERE readerId =? ',[newPassword, readerId],  function(err, result){
+    if (err) throw err;
+     res.redirect('/borrowing');
+  });
+
+  };
+     if(oldPassword.localeCompare(password) !=0 && newPassword.localeCompare(confirmPassword)==0){
+    errors.push("Old password wrong!!");
+    };
+    if(newPassword.localeCompare(confirmPassword) !=0 && oldPassword.localeCompare(password) ==0 ){
+    errors.push("Cofirm password wrong!!");
+    };
+    if(newPassword.localeCompare(confirmPassword) !=0 && oldPassword.localeCompare(password) !=0 ){
+    errors.push("Old password and confirm Password wrong!!");
+    };
+    if(newPassword.localeCompare(password) ==0 && oldPassword.localeCompare(password) ==0 && newPassword.localeCompare(confirmPassword) ==0){
+    errors.push("You can't use Old Password!!");
+    };
+    if(errors.length){
+        res.render('./readers/changePassword', {
+      errors: errors,
+      values: req.body
+    });
+    return;
+  }
+
+
+ });
 };
