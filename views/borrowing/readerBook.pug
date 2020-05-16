@@ -22,6 +22,8 @@ html
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
         ul.navbar-nav.ml-auto
           li
+            a.btn.btn-outline-success(href='/borrowing/changePassword/' +reader.readerId) Thay mật khẩu
+          li
             if reader
              p.nav-link(href='#')= "Ngày Tạo Thẻ: " + reader.ngayTao +"____  Ngày Hết Hạn Thẻ: " +reader.ngayHetHan
           li
