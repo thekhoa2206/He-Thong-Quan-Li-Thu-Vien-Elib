@@ -12,5 +12,8 @@ router.post('/borrowBook', controller.postBorrowBook);
 
 router.get('/viewReader', controller.viewReader);
 
+router.get('/changePassword/:storeId', controller.changePassword);
+
+router.post('/changePassword/:storeId', controller.postChangePassword);
 
 module.exports = router;
