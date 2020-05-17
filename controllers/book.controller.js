@@ -5,8 +5,7 @@ const shortid = require('shortid')
 
 module.exports.books = function (req, res) {
    var bookId = req.body.bookId
-   quantity = 1;
-    con.query('SELECT * FROM books WHERE quantity = ?',quantity, function (err, result) { // retrieve data 
+    con.query('SELECT * FROM books ', function (err, result) { // retrieve data 
     if (err) throw err;
     res.render('./books/books', { books: result});
   });
@@ -107,6 +106,7 @@ module.exports.postReturnBook = function(req, res){
         readerId, 
         dateReturn
   ];
+  var status = "còn"
   con.query('DELETE FROM borrowing WHERE bookId = ?',bookId, function (err, result){
     if (err) throw err;
   con.query('INSERT INTO returning (bookId, returnId, readerId, dateReturn) VALUES(?) ', [values], function(err, result){
@@ -118,7 +118,7 @@ module.exports.postReturnBook = function(req, res){
      var quantity = result[0].QuantityBook;
      quantity = quantity + 1;
     console.log(quantity);
-        con.query('UPDATE books SET quantity = ? WHERE bookId=?',[quantity, bookId], function(err, result){
+        con.query('UPDATE books SET quantity = ?,status=? WHERE bookId=?',[quantity,status, bookId], function(err, result){
         if(err) throw err;
             console.log("1 record inserted"); //checked
         });
