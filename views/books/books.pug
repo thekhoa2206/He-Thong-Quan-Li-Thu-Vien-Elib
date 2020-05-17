@@ -45,6 +45,7 @@ html
             th Thể Loại
             th Nhà Xuất Bản
             th Địa Chỉ Sách
+            th Trạng Thái
             th
             th
           each book in books
@@ -56,6 +57,7 @@ html
               td= book.kind
               td= book.NXB
               td= book.address
+              td= book.status
               td
                   a.btn.btn-Success(href='/books/editBook/' +book.bookId) Edit
               td
