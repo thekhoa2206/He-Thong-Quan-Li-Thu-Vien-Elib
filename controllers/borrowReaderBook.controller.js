@@ -178,8 +178,8 @@ module.exports.postBorrowBook = function (req, res) {
 
         now1 = new Date();
         now1 = now1.getTime();
-        console.log(now1);
-        console.log(tra2);
+        // console.log(now1);
+        // console.log(tra2);
 
         if(now1 >= tra2 || now >= tra1){
             errors.push("Bạn đang có sách mượn quá 45 ngày!!");
@@ -260,7 +260,6 @@ module.exports.postChangePassword = function(req, res){
     if (err) throw err;
      res.redirect('/borrowing');
   });
-
   };
 
            //check các điều kiện về mật khẩu khi độc giả đổi mật khẩu của mình
@@ -283,7 +282,5 @@ module.exports.postChangePassword = function(req, res){
     });
     return;
   }
-
-
  });
 };
