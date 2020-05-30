@@ -12,12 +12,10 @@ html
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/library') Home 
           li.nav-item.active
             a.nav-link(href='') Reader
-          li.nav-item.active
-            a.nav-link(href='/books') Book
-          li.nav-item.active
-            a.nav-link(href='/library') Home 
           form.form-inline.mt-0(action='/readers/searchReader', method='GET')
             input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
             button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search

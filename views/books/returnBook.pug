@@ -11,12 +11,8 @@ html
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link(href='/library') Home 
-          li.nav-item.active
-            a.nav-link(href='/readers') Readers
-          li.nav-item.active
-            a.nav-link(href='/books') Books
+          li.nav-item
+            a.nav-link(href='/library') Home
           li.nav-item.active
             a.nav-link(href='') Trả Sách
         ul.navbar-nav.ml-auto
@@ -31,7 +27,7 @@ html
       main
         if errors
           each error in errors
-            .alert.alert-danger= error
+            .alert.alert-success= error
         h2.text-centers Trả Sách
         .container.mt-3
           form(action="/books/returnBook", method="POST")
