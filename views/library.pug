@@ -7,25 +7,64 @@ html
     meta(name='description', content='A cool thing made with Glitch')
     link#favicon(rel='icon', href='/images/favicon-96x96.png', type='image/png')
     link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
-    link(rel='stylesheet' type='text/css' href="/stylesheets/style.css")
+    link(rel='stylesheet' type='text/css' href="/stylesheets/styleMenu.css")
    body
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/library') Home 
+          li.nav-item
+            a.nav-link(href='/books/viewReturnBook') Sách đã được trả
           li.nav-item.active
-            a.nav-link(href='') Home 
+            a.nav-link(href='') Sách đã được mượn
           li.nav-item
-            a.nav-link(href='/readers') Quản Lí Độc Giả
-          li.nav-item
-            a.nav-link(href='/books') Quản Lí Sách
-          li.nav-item
-            a.nav-link(href='/viewBorrowReader') Quản Lí Mượn Trả Sách
+            a.nav-link(href='/viewBorrowReader/returnBook') Trả Sách
+          form.form-inline.mt-0(action='', method='GET')
+            input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+            button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
         ul.navbar-nav.ml-auto
           li
             if reader
-             p.nav-link(href='#')= reader.name
+             p.nav-link(href='#')= reader.nameUser
           li
             if !reader
              a.btn.btn-primary(href='/auth/login') Login
           li 
             a.btn.btn-outline-success(href='/logout') Log out
+      br
+      br
+      br
+      br
+      br
+      main.col-md-50
+        .content
+          .border
+            .container
+              img(src='/images/hh.jpg', alt='/readers', width='170px', height='145px')
+              br
+              b Home
+          .border
+            .container
+              a(href='/books')
+                img(src='/images/gg.jpg', alt='/readers', width='170px', height='145px')
+              br
+              b Quản lí sách 
+          .border
+            .container
+              a(href= '/readers')
+                img(src='/images/ff.png', alt='/readers', width='170px', height='145px')
+              br
+              b Quản lí độc giả 
+          .border
+            .container
+              a(href='/viewBorrowReader')
+                img(src='/images/favicon-96x96.png', alt='/readers', width='170px', height='145px')
+              br
+              b Mượn trả sách
+          .border
+            .container
+              a(href='/viewBorrowReader')
+                img(src='/images/favicon-96x96.png', alt='/readers', width='170px', height='145px')
+              br
+              b Mượn trả sách 
