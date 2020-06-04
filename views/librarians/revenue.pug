@@ -12,10 +12,6 @@ html
       header
        nav.navbar.navbar-expand-lg.navbar-light.bg-light
         ul.navbar-nav.mr-auto
-          li.nav-item.active.col-md-6
-            a.nav-link(href='/librarians/revenue') Revenue
-          li.nav-item.active.col-md-6
-            a.nav-link(href='/librarians/createLibrarian') Add new librarian
         ul.navbar-nav.ml-auto
           li
             if reader
@@ -25,32 +21,27 @@ html
              a.btn.btn-primary(href='/auth/login') Login
           li 
             a.btn.btn-outline-success(href='/logout') Log out
-      main
+      main.col-md-6
         br
         br
-        h2 Danh Sách Phí Thẻ
+        h2 Danh Sách Trả phí
+        form.form-inline.mt-0(action='/librarians/searchMonth', method='GET')
+          input.form-control.mr-sm-2(type='search', name='q', placeholder='Search', aria-label='Search')
+          button.btn.btn-outline-success.my-2.my-sm-0(type='submit') Search
         table.table
          thead.thead-dark
           tr
             th Mã Độc Giả
-            th Tên
-            th Ngày Sinh
-            th Giới Tính
-            th Số Điện Thoại
-            th Địa Chỉ
-            th Ngày Tạo
-            th
-            th
+            th Họ Tên
+            th Phí
+            th Ngày Nạp
           each reader in readers
             tr 
               td= reader.readerId
               td= reader.nameUser
-              td= reader.dateOfBirth
-              td= reader.gender
-              td= reader.phone
-              td= reader.address
-              td= reader.ngayTao
-              td
-                a.btn.btn-outline-primary(href='/librarians/editLibrarian/' +reader.readerId) Edit
-              td
-                a.btn.btn-outline-danger(href='/librarians/deleteLibrarian/' +reader.readerId) Delete
+              td= reader.cost
+              td= reader.dateAdd
+        br
+        table.table
+          th Total =
+          td= total

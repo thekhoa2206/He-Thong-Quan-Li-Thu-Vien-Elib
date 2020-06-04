@@ -1,31 +1,32 @@
 extends ../layouts/common
 block content
 
-	h2 Infomation staff
-	p
-	b Mã Độc Giả:
-	span= readers[0].readerId
-
-	br
-	b Tên:
-	span= readers[0].nameUser
-
-	br
-	b Ngày Sinh:
-	span= readers[0].dateofbirth
-
-	br
-	b Giới Tính:
-	span= readers[0].gender
-
-	br
-	b Số Điện Thoại:
-	span= readers[0].phone
-
-	br
-	b Email:
-	span= readers[0].email
-
-	br
-	b Địa Chỉ:
-	span= readers[0].address
+	h2.text-center Thông tin độc giả
+	main.col-md-10
+		table(align='right', cellpadding='30', border='1')
+			tr
+				td(colspan='4', rowspan='10')=readers[0].nameUser
+			each times in time
+				td=times.timeIn
+		table(align='center', cellpadding='20', border='1')
+			tr
+			td Mã Độc Giả
+			td=readers[0].readerId
+			tr
+			td Tên
+			td=readers[0].nameUser
+			tr
+			td Ngày Sinh
+			td=readers[0].dateofbirth
+			tr
+			td Giới Tính
+			td=readers[0].gender
+			tr
+			td Số Điện Thoại
+			td=readers[0].phone
+			tr
+			td Email
+			td=readers[0].email
+			tr
+			td Địa Chỉ
+			td=readers[0].address
