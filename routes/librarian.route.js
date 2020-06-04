@@ -12,5 +12,10 @@ router.get('/editLibrarian/:readerId', controller.editLibrarian);
 
 router.post('/editLibrarian/:readerId', controller.postEditLibrarian);
 
-router.get('/deleteLibrarian/:readerId', controller.deleteLibrarian)
+router.get('/deleteLibrarian/:readerId', controller.deleteLibrarian);
+
+router.get('/revenue', controller.revenue);
+
+router.get('/searchMonth', controller.searchMonth)
+
 module.exports = router;
