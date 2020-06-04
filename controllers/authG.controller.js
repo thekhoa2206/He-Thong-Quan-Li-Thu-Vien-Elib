@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var con = require('../mysql-connection')
 var md5 = require('md5')
-
+const shortid = require('shortid')
 module.exports.login = function (req, res, next) {
 	res.render('auth/loginG');
 };
@@ -9,9 +9,11 @@ module.exports.login = function (req, res, next) {
 module.exports.postLogin = function (req, res, next) {
 	var readerId = req.body.readerId;
 	var password = req.body.password;
+
+	var now = new Date();
 	con.query('SELECT * FROM readers WHERE readerId = ?',[readerId], function (err, result) { //result trả về 1 array chứa object
 		//console.log(typeof result[0].username)
-
+     req.session.readerId = result[0].readerId;
 		if (err) throw err;
 		if(result[0] === undefined || result[0].readerId !== readerId) {
 			res.render('auth/login', {
@@ -35,6 +37,16 @@ module.exports.postLogin = function (req, res, next) {
 			return;
 		}
 		if(result[0].password == hashedPassword && result[0].readerId == readerId ){
+	    var idtime = shortid.generate();
+         var values = [
+		idtime,
+		req.session.readerId,
+		now,
+        ]
+        console.log(values)
+        con.query('INSERT INTO time (idtime, readerId, timeIn) VALUES (?)',[values], function(err, result){
+        if(err) throw err;
+        })
 			res.render('auth/loginG', {
 				errors:[
 					'Logged in successfully!!'
@@ -42,7 +54,7 @@ module.exports.postLogin = function (req, res, next) {
 			});
 			return;
 		}
-		req.session.readerId = result[0].readerId;
+		
      var ngayHetHan = result[0].ngayHetHan;
 
       x =  ngayHetHan.slice(0, 2);
@@ -55,8 +67,9 @@ module.exports.postLogin = function (req, res, next) {
       g.setFullYear(z);
        var date = new Date(g);
       var e = date.getTime();
-      var now = new Date();
+      
       var f = now.getTime();
+
       if(f <= e){
 		//req.session.username = result[0].username;
 		console.log(result[0].userId)

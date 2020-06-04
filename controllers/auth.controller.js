@@ -52,7 +52,7 @@ module.exports.postLogin = function (req, res, next) {
 
 
 		req.session.readerId = result[0].readerId;
-
+		console.log(req.session)
 		//req.session.username = result[0].username;
 		console.log(result[0].userId)
 

@@ -1,6 +1,6 @@
 var mysql = require('mysql')
 var con = require('../mysql-connection')
-
+const shortid = require('shortid')
 module.exports.borrowBooks = function (req, res) {
    var bookId = req.body.bookId
    var readerId = req.body.readerId;

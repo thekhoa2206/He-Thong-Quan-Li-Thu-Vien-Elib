@@ -74,3 +74,33 @@ module.exports.deleteLibrarian = function(req, res){
   res.redirect('/librarians');
  });
 };
+
+module.exports.revenue = function(req, res){
+  con.query('SELECT readers.readerId, readers.nameUser, cost.readerId, cost.cost, cost.dateAdd FROM readers,cost WHERE readers.readerId= cost.readerId', function(err, result){
+  if (err) throw err;
+   var total =0;
+   for (var i = 0; i < result.length ; i++) {
+     total += result[i].cost
+   }
+   res.render('./librarians/revenue',{readers : result, total : total});
+  })
+}
+
+module.exports.searchMonth = function(req, res){
+  var q = req.query.q;
+  var total = 0;
+ con.query('SELECT readers.readerId, readers.nameUser, cost.readerId, cost.cost, cost.dateAdd FROM readers,cost WHERE readers.readerId= cost.readerId', function(err, result){
+  if (err) throw err;
+  
+      for (var i = 0; i < result.length; i++) {
+     result[i].dateAdd =  result[i].dateAdd.slice(3, 5);
+    if(q ==  result[i].dateAdd){
+      total += result[i].cost;
+    }
+  }
+    var matchedMonth = result.filter(function(reader){
+      return reader.dateAdd.indexOf(q) !== -1;
+    });
+   res.render('./librarians/revenue',{readers : matchedMonth, total : total});
+  }); 
+};
